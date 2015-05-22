@@ -1,6 +1,7 @@
 import org.scalatest._
 import org.scalatest.matchers.ShouldMatchers
-import com.example._
+import com.example.{Union}
+import com.example.UnionFunction._
 
 class UnionSpecification extends FlatSpec with ShouldMatchers {
     val qu =  new Union
@@ -19,6 +20,8 @@ class UnionSpecification extends FlatSpec with ShouldMatchers {
     qu.quickUnion2(3,4)
     qu.quickUnion2(4,5)
     qu.quickUnion2(7,10)
+
+    val quf =  quickUnion(quickUnion(quickUnion(quickUnion(quickUnion(Map(),1,2),2,3),3,4),4,5),7,10)
 
    "quick Union" should "return connected" in {
     qu.quickFind(3,4) should equal(true)
@@ -84,10 +87,34 @@ class UnionSpecification extends FlatSpec with ShouldMatchers {
   }
 
   "point 1 and 5 of union 2" should "return  connected" in {
-    qu.quickFind2(1,3) should equal(true)
+    qu.quickFind2(1,5) should equal(true)
   }
 
   "point 1 and 7 of union 2" should "not connected" in {
    qu.quickFind2(1,7) should equal(false)
+  }
+
+  "quick Union of union func" should "return connected" in {
+      quickFind(quf,3,4) should equal(true)
+  }
+
+  "point (3,4) and (4,3) of union func" should "be equal" in {
+    quickFind(quf,3,4) should equal(quickFind(quf,4,3))
+  }
+
+  "point 3 and 5 of union func" should "return connected" in {
+     quickFind(quf,3,5) should equal(true)
+  }
+
+  "point 1 and 3 of union func" should "return  connected" in {
+    quickFind(quf,1,3) should equal(true)
+  }
+
+  "point 1 and 5 of union func" should "return  connected" in {
+    quickFind(quf,1,5) should equal(true)
+  }
+
+  "point 1 and 7 of union func" should "not connected" in {
+   quickFind(quf,1,7) should equal(false)
   }
 }
