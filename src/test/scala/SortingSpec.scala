@@ -64,5 +64,33 @@ class SortingSpec extends FlatSpec with ShouldMatchers {
     merge(List(7,11,14),List(8,9,10,12,16,16,21)) should equal(MutableList(7,8,9,10,11,12,14,16,16,21))
   }
 
+  "Quick sort of empty array" should "return empty array" in {
+     val arr = Array[Int]()
+     quickSort(arr)
+     arr should equal (Array[Int]())
+  }
 
- }
+   "Quick sort of positive array" should "return sorted(asc) array" in {
+     val arr = Array[Int](3,7,8,5,2,1,9,5,4)
+     quickSort(arr)
+     arr should equal (Array[Int](1,2,3,4,5,5,7,8,9))
+   }
+
+   "Quick sort of reverse sorted array" should "return sorted(asc) array" in {
+     val arr = Array[Int](9,8,7,6,5,4,3,2,1)
+     quickSort(arr)
+     arr should equal (Array[Int](1,2,3,4,5,6,7,8,9))
+   }
+
+    "Quick sort of  sorted array" should "return sorted(asc) array" in {
+     val arr = Array[Int](1,2,3,4,5,6,7,8,9)
+     quickSort(arr)
+     arr should equal (Array[Int](1,2,3,4,5,6,7,8,9))
+    }
+
+    "Quick sort of  negative numbers array" should "return sorted(asc) array" in {
+     val arr = Array(-9,-5,-8,-3,-7,-2,-1)
+     quickSort(arr)
+     arr should equal (Array(-9,-8,-7,-5,-3,-2,-1))
+    }
+}

@@ -68,4 +68,34 @@ object Sorting {
       }
     result
   }
+
+
+  def quickSort(data: Array[Int]) = {
+     def sort(l: Int, h: Int): Unit =  {
+       val pivot = data((l+h)/2)
+      var left = l
+      var right = h
+      while(left<=right)
+      {
+        while(data(left) < pivot)
+         { left = left + 1 }
+        while (data(right) > pivot)
+         { right = right - 1 }
+       if(left <= right)
+       {
+         val temp = data(left)
+         data(left) = data(right)
+         data(right) = temp
+         left = left + 1
+         right = right - 1
+       }
+      }
+      if(l < right) sort(l,right)
+      if(right < h) sort(left,h)
+    }
+    val length = data.length-1
+    if(length > 0)
+      sort(0,length)
+ }
+
 }
